@@ -6,19 +6,17 @@ var User = require('./user');
 
 router.get('/', function(req, res, next) {
     Message.find()
-        .exec()
-        .then(function(result) { //don't use plain .exce(function(err, result))// might not work in fetching
-            console.log('no error from mongo');
+        .populate('user', 'firstName')
+        .exec(function(err, messages) {
+            if (err) {
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
             res.status(200).json({
-                title: 'Success',
-                obj: result
-            });
-        })
-        .catch(function(err) {
-            console.log('Received error from mongo');
-            return res.status(500).json({
-                title: 'Error getting messages',
-                error: err
+                message: 'Success',
+                obj: messages
             });
         });
 });
@@ -65,6 +63,7 @@ router.post('/', function(req, res, next) {
     });
 });
 router.patch('/:id', function(req, res, next) {
+    var decoded = jwt.decode(req.query.token);
     Message.findById(req.params.id, function(err, message) {
         if (err) {
             return res.status(500).json({
@@ -78,6 +77,13 @@ router.patch('/:id', function(req, res, next) {
                 error: { message: 'message not found' }
             });
         }
+        if (message.user != decoded.user._id) {
+            return res.status(401).json({
+                title: 'Not Authenticated',
+                error: { message: 'Users do not match' }
+            });
+        }
+
         message.content = req.body.content;
         message.save(function(err, result) {
             if (err) {
@@ -94,16 +100,37 @@ router.patch('/:id', function(req, res, next) {
     });
 });
 router.delete('/:messageId', function(req, res, next) {
-    const { messageId } = req.params;
-    Message.findByIdAndRemove(messageId)
-        .then(oldMessage => {
-            res.status(OK).json({
-                success: true,
-                msg: 'Message deleted successfully',
-                payload: oldMessage
+    var decoded = jwt.decode(req.query.token);
+    Message.findById(req.params.id, function(err, message) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
             });
-        })
-        .catch(next);
+        }
+        if (!message) {
+            return res.status(500).json({
+                title: 'No Message Found!',
+                error: { message: 'Message not found' }
+            });
+        }
+        if (message.user != decoded.user._id) {
+            return res.status(401).json({
+                title: 'Not Authenticated',
+                error: { message: 'Users do not match' }
+            });
+        }
+        const { messageId } = req.params;
+        Message.findByIdAndRemove(messageId)
+            .then(oldMessage => {
+                res.status(OK).json({
+                    success: true,
+                    msg: 'Message deleted successfully',
+                    payload: oldMessage
+                });
+            })
+            .catch(next);
+    });
 });
 
 module.exports = router;

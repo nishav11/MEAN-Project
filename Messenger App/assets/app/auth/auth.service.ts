@@ -25,9 +25,9 @@ export class AuthService {
             .catch((error: Response) => Observable.throw(error.json()));
     }
     logout() {
-        sessionStorage.clear();
+        localStorage.clear();
     }
     isLoggedIn() {
-        return sessionStorage.getItem('token') !== null;
+        return localStorage.getItem('token') !== null;
     }
 }

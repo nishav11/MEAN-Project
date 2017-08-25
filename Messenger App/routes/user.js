@@ -28,7 +28,7 @@ router.post('/', function(req, res, next) {
 router.post('/signin', function(req, res, next) {
     User.findOne({ email: req.body.email }, function(err, user) {
         if (err) {
-            res.status(201).json({
+            res.status(500).json({
                 title: 'An error occured',
                 error: err
             });

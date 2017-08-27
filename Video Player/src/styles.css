@@ -3,3 +3,8 @@
 body .container {
     font-family: 'Roboto', sans-serif;
 }
+
+.img-carousel-size {
+    max-height: 540px;
+    width: 100%;
+}

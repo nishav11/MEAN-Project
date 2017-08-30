@@ -1,0 +1,7 @@
+<div *ngIf='query'>
+    <h3> You searched for <b>{{query}}</b> </h3>
+</div>
+<div class='text-center' *ngIf='!query'>
+    <h3>Search Somthing</h3>
+    <app-search class="search-inline" *ngIf='!query'></app-search>
+</div>

@@ -12,6 +12,8 @@ import { VideoDetailComponent } from './video-detail/video-detail.component';
 import { SafePipe } from './safe.pipe';
 import { HomeComponent } from './home/home.component';
 import { VphomeComponent } from './vphome/vphome.component';
+import { SearchComponent } from './search/search.component';
+import { SearchDetailComponent } from './search-detail/search-detail.component';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { VphomeComponent } from './vphome/vphome.component';
     HomeComponent,
     SafePipe,
     VphomeComponent,
+    SearchComponent,
+    SearchDetailComponent,
 
   ],
   imports: [

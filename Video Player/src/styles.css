@@ -8,3 +8,12 @@ body .container {
     max-height: 540px;
     width: 100%;
 }
+
+h1 .jumbotron {
+    position: relative;
+    float: right;
+}
+
+.search-inline .navbar-left {
+    float: none !important;
+}

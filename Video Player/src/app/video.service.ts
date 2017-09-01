@@ -6,10 +6,10 @@ import { Video } from './video';
 @Injectable()
 export class VideoService {
 
-  private _getUrl = '/api/videos';
-  private _postUrl = '/api/videos';
-  private _putUrl = '/api/video/';
-  private _deleteUrl = '/api/video/';
+  private _getUrl = '/api/https://video-player-app.herokuapp.com/videos';
+  private _postUrl = '/api/https://video-player-app.herokuapp.com/videos';
+  private _putUrl = '/api/https://video-player-app.herokuapp.com/video/';
+  private _deleteUrl = '/api/https://video-player-app.herokuapp.com/video/';
 
   constructor( private _http: Http ) { }
 

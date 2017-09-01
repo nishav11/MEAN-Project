@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const Video = require('../models/video');
 
-const db = "mongodb://nishav:nisha1308@ds157349.mlab.com:57349/videoplayer"
+const db = "mongodb://nishav:nisha1308@ds157349.mlab.com:57349/videoplayer";
 mongoose.Promise = global.Promise;
 mongoose.connect(db, function(err) {
     if (err) {
@@ -14,7 +14,7 @@ mongoose.connect(db, function(err) {
     }
 });
 
-router.get('/videos', function(req, res) {
+router.get('https://video-player-app.herokuapp.com/videos', function(req, res) {
 
     console.log('get request from all videos');
     Video.find({}).exec(function(err, videos) {
@@ -26,7 +26,7 @@ router.get('/videos', function(req, res) {
     });
 
 });
-router.get('/videos/:id', function(req, res) {
+router.get('https://video-player-app.herokuapp.com/videos/:id', function(req, res) {
 
     console.log('get request from a video');
     Video.findById(req.params.id).exec(function(err, video) {
@@ -39,7 +39,7 @@ router.get('/videos/:id', function(req, res) {
 
 });
 
-router.post('/videos', function(req, res) {
+router.post('https://video-player-app.herokuapp.com/videos', function(req, res) {
     console.log('Post a Video');
     var newVideo = new Video();
     newVideo.title = req.body.title;
@@ -54,7 +54,7 @@ router.post('/videos', function(req, res) {
     });
 });
 
-router.put('/video/:id', function(req, res) {
+router.put('https://video-player-app.herokuapp.com/video/:id', function(req, res) {
     console.log("Update a Video");
     Video.findByIdAndUpdate(req.params.id, {
             $set: { title: req.body.title, url: req.body.url, description: req.body.description }
@@ -73,7 +73,7 @@ router.put('/video/:id', function(req, res) {
 
 });
 
-router.delete('/video/:id', function(req, res) {
+router.delete('https://video-player-app.herokuapp.com/video/:id', function(req, res) {
     console.log('Remove a Video');
 
     Video.findByIdAndRemove(req.params.id, function(err, deletedVideo) {

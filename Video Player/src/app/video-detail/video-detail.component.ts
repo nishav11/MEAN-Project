@@ -13,7 +13,7 @@ export class VideoDetailComponent implements OnInit {
   video: any;
 
 
-private editTitle =  false;
+ editTitle =  false;
 private updateVideoEvent = new EventEmitter();
 private deleteVideoEvent = new EventEmitter();
   constructor() { }

@@ -14,7 +14,7 @@ export class VideoCenterComponent implements OnInit {
   videos: Array<Video>;
 
   selectedVideo: Video;
-  private hiddenNewVideo = true;
+  hiddenNewVideo = true;
   constructor(private _videoService: VideoService) { }
 
   ngOnInit() {

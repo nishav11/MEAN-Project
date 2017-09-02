@@ -11,7 +11,7 @@ import { Video } from '../video';
   outputs: ['SelectVideo']
 })
 export class VideoListComponent implements OnInit {
-
+  videos: Video; // for error correction only for deploying on heroku
 
  public SelectVideo = new EventEmitter();
   constructor() { }
